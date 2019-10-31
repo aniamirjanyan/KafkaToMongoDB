@@ -84,7 +84,7 @@ plugin.path=/usr/share/java,/usr/share/java/mongo-kafka-0.2-all.jar
 
 Copy the MongoSinkConnector.properties file (located in mongodb-kafka-connect folder) to path-to-confluent/etc/kafka.
 ```
-sudo cp <path-to-mongodb-kafka-connect-mongodb-0.2>/etc/MongoSinkConnector.properties <path-to-confluent-5.3.1>/etc/kafka/
+$ sudo cp <path-to-mongodb-kafka-connect-mongodb-0.2>/etc/MongoSinkConnector.properties <path-to-confluent-5.3.1>/etc/kafka/
 ```
 
 Now, modify the MongoSinkConnector.properties 
@@ -134,4 +134,44 @@ change.data.capture.handler=
 # Topic override examples for the sourceB topic
 topic.override.sourceB.collection=sourceB
 topic.override.sourceB.document.id.strategy=com.mongodb.kafka.connect.sink.processor.id.strategy.ProvidedInValueStrategy
+```
+
+**5. Final Step**
+
+Now let's start the servers.
+
+- Zookeeper
+
+Open a terminal, navigate to confluent directory and run this command. 
+```
+$ sudo bin/zookeeper-server-start etc/kafka/zookeeper.properties
+```
+
+- Kafka
+
+Open another terminal, navigate to confluent directory and run this command.
+```
+$ sudo bin/kafka-server-start etc/kafka/server.properties
+```
+
+- Schema Registry
+
+Open another terminal, navigate to confluent directory and run this command.
+```
+$ sudo bin/schema-registry-start etc/schema-registry/schema-registry.properties
+```
+
+- Kafka Rest
+
+You should also start Kafka Rest in order to produce Avro message in Kafka with `curl` command.
+Open another terminal, navigate to confluent directory and run this command.
+```
+$ sudo bin/kafka-rest-start etc/kafka-rest/kafka-rest.properties
+```
+
+```
+$ curl -X POST -H "Content-Type: application/vnd.kafka.avro.v1+json" \
+      --data '{"value_schema": "{\"type\": \"record\", \"name\": \"User\", \"fields\": [{\"name\": \"name\", \"type\": \"string\"}]}", "records": [{"value": {"name": "testUser"}}]}' \
+      "http://localhost:8082/topics/avrotest"
+  {"offsets":[{"partition":0,"offset":0,"error_code":null,"error":null}],"key_schema_id":null,"value_schema_id":21}
 ```
