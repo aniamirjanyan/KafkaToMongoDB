@@ -169,7 +169,7 @@ Open another terminal, navigate to confluent directory and run this command.
 $ sudo bin/kafka-rest-start etc/kafka-rest/kafka-rest.properties
 ```
 
-https://docs.confluent.io/2.0.1/kafka-rest/docs/intro.html
+Now, let's add Avro message in Kafka. (https://docs.confluent.io/2.0.1/kafka-rest/docs/intro.html)
 
 ```
 $ curl -X POST -H "Content-Type: application/vnd.kafka.avro.v1+json" \
@@ -177,6 +177,7 @@ $ curl -X POST -H "Content-Type: application/vnd.kafka.avro.v1+json" \
       "http://localhost:8082/topics/avrotest"
   {"offsets":[{"partition":0,"offset":0,"error_code":null,"error":null}],"key_schema_id":null,"value_schema_id":21}
 ```
+You can run this command multiple times and change the values in this field `[{"value": {"name": "testUser"}}]` to have more lines of data.
 
 Run this command to start the connection (make sure mongodb is started)
 ```
