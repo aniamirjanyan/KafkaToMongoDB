@@ -169,9 +169,16 @@ Open another terminal, navigate to confluent directory and run this command.
 $ sudo bin/kafka-rest-start etc/kafka-rest/kafka-rest.properties
 ```
 
+https://docs.confluent.io/2.0.1/kafka-rest/docs/intro.html
+
 ```
 $ curl -X POST -H "Content-Type: application/vnd.kafka.avro.v1+json" \
       --data '{"value_schema": "{\"type\": \"record\", \"name\": \"User\", \"fields\": [{\"name\": \"name\", \"type\": \"string\"}]}", "records": [{"value": {"name": "testUser"}}]}' \
       "http://localhost:8082/topics/avrotest"
   {"offsets":[{"partition":0,"offset":0,"error_code":null,"error":null}],"key_schema_id":null,"value_schema_id":21}
+```
+
+Run this command to start the connection
+```
+sudo ./bin/connect-standalone ./etc/schema-registry/connect-avro-standalone.properties ./etc/kafka/MongoSinkConnector.propertie
 ```
