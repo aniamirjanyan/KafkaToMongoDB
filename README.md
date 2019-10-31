@@ -71,23 +71,23 @@ kafkastore.bootstrap.servers=PLAINTEXT://localhost:9092
 Go to https://www.confluent.io/hub/mongodb/kafka-connect-mongodb and download the connector.  
 Extract the connector folder. In there you can find `lib` directory that contains a `.jar` file. Copy the file in your `plugin.path`. The `.jar` file must be also copied in confluent plugin path. 
 ```
-sudo cp mongodb-kafka-connect-mongodb-0.2/lib/* /usr/share/java
+sudo cp mongodb-kafka-connect-mongodb-0.2/lib/* <your-plugin-path>
 sudo cp mongodb-kafka-connect-mongodb-0.2/lib/* <path-to-confluent>/share/java
 
 ```
 
 You can find the path in confluent directory by navigating to `/etc/kafka/connect-standalone.properties`.
-You can have more than one paths. Example: 
+You can add more than one paths by separating them with commas. Add also `<your-plugin-path>/<jar-file>`.  Example: 
 ```
 plugin.path=/usr/share/java,/usr/share/java/mongo-kafka-0.2-all.jar
 ```
 
-Copy the MongoSinkConnector.properties file (located in mongodb-kafka-connect folder) to path-to-confluent/etc/kafka.
+Copy the MongoSinkConnector.properties file (located in mongodb-kafka-connect directory) to path-to-confluent/etc/kafka.
 ```
 $ sudo cp <path-to-mongodb-kafka-connect-mongodb-0.2>/etc/MongoSinkConnector.properties <path-to-confluent-5.3.1>/etc/kafka/
 ```
 
-Now, modify the MongoSinkConnector.properties 
+Now, modify the MongoSinkConnector.properties. Configurations are the following: 
 
 ```ini    
 name=mongo-sink
@@ -179,7 +179,7 @@ $ curl -X POST -H "Content-Type: application/vnd.kafka.avro.v1+json" \
 ```
 You can run this command multiple times and change the values in this field `[{"value": {"name": "testUser"}}]` to have more lines of data.
 
-Run this command to start the connection (make sure mongodb is started)
+Run this command to start the MongoDB Kafka Connector (make sure mongodb is started)
 ```
 sudo ./bin/connect-standalone ./etc/schema-registry/connect-avro-standalone.properties ./etc/kafka/MongoSinkConnector.propertie
 ```
