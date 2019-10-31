@@ -201,3 +201,4 @@ system.version
 > db.avro_data.find()
 { "_id" : ObjectId("5dbac53f7a110726bf42efe5"), "name" : "testUser" }
 ```
+Here is your data loaded from Kafka to MongoDB.
