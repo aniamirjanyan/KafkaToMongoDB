@@ -178,7 +178,25 @@ $ curl -X POST -H "Content-Type: application/vnd.kafka.avro.v1+json" \
   {"offsets":[{"partition":0,"offset":0,"error_code":null,"error":null}],"key_schema_id":null,"value_schema_id":21}
 ```
 
-Run this command to start the connection
+Run this command to start the connection (make sure mongodb is started)
 ```
 sudo ./bin/connect-standalone ./etc/schema-registry/connect-avro-standalone.properties ./etc/kafka/MongoSinkConnector.propertie
+```
+Open another terminal and type `mongo`. The mongoDB shell will open. Type the following
+```
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+
+> use admin          //or use the db name you specified in properties instead of admin
+switched to db admin
+
+> show collections 
+avro_data
+system.users
+system.version
+
+> db.avro_data.find()
+{ "_id" : ObjectId("5dbac53f7a110726bf42efe5"), "name" : "testUser" }
 ```
