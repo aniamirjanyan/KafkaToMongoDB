@@ -12,6 +12,7 @@ tar xzf confluent-5.3.1-2.12.tar.gz
 **2. Configurations**
 
 - Zookeper  
+
 Inside conflunet navigate to `/etc/kafka/zookeeper.properties` and modify it as shown
 ```
 tickTime=2000
@@ -21,12 +22,28 @@ clientPort=2181
 Note: This configurations are for standalone mode.
 
 - Kafka  
+
 Navigate to `/etc/kafka/server.properties` and modify it as shown
 ```
 zookeeper.connect=zookeeper:2181
 listeners=PLAINTEXT://:9092
+
 # Uncomment the lines below
 metric.reporters=io.confluent.metrics.reporter.ConfluentMetricsReporter
 confluent.metrics.reporter.bootstrap.servers=localhost:9092
 confluent.metrics.reporter.topic.replicas=1
+```
+
+- Control Center
+
+Navigate to `/etc/confluent-control-center/control-center-production.properties` and modify it as shown
+```
+confluent.controlcenter.data.dir=/var/lib/confluent/control-center
+zookeeper.connect=zookeeper:2181
+bootstrap.servers=kafka:9092
+confluent.controlcenter.schema.registry.url=http://schema-registry:8081
+
+# Uncomment the lines below
+confluent.controlcenter.connect.cluster=http://connect1:8083
+confluent.controlcenter.schema.registry.url=http://schema-registry:8081
 ```
