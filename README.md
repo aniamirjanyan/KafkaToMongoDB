@@ -87,7 +87,7 @@ Copy the MongoSinkConnector.properties file (located in mongodb-kafka-connect di
 $ sudo cp <path-to-mongodb-kafka-connect-mongodb-0.2>/etc/MongoSinkConnector.properties <path-to-confluent-5.3.1>/etc/kafka/
 ```
 
-Now, modify the MongoSinkConnector.properties. Configurations are the following: 
+Now, modify the MongoSinkConnector.properties. Example configurations are the following: 
 
 ```ini    
 name=mongo-sink
@@ -136,7 +136,7 @@ topic.override.sourceB.collection=sourceB
 topic.override.sourceB.document.id.strategy=com.mongodb.kafka.connect.sink.processor.id.strategy.ProvidedInValueStrategy
 ```
 
-**5. Final Step**
+**5. Starting servers and running the Connector**
 
 Now let's start the servers.
 
@@ -181,7 +181,7 @@ You can run this command multiple times and change the values in this field `[{"
 
 Run this command to start the MongoDB Kafka Connector (make sure mongodb is started)
 ```
-sudo ./bin/connect-standalone ./etc/schema-registry/connect-avro-standalone.properties ./etc/kafka/MongoSinkConnector.propertie
+sudo ./bin/connect-standalone ./etc/schema-registry/connect-avro-standalone.properties ./etc/kafka/MongoSinkConnector.properties
 ```
 Open another terminal and type `mongo`. The mongoDB shell will open. Type the following
 ```
