@@ -22,7 +22,7 @@ tar xzf confluent-5.3.1-2.12.tar.gz
 
 - Zookeper  
 
-Inside conflunet navigate to `/etc/kafka/zookeeper.properties` and modify it as shown
+Inside confluent directory navigate to `/etc/kafka/zookeeper.properties` and set the following configurations
 ```
 tickTime=2000
 dataDir=/var/lib/zookeeper/
@@ -32,7 +32,7 @@ Note: This configurations are for standalone mode.
 
 - Kafka  
 
-Navigate to `/etc/kafka/server.properties` and modify it as shown
+Navigate to `/etc/kafka/server.properties` and set the following configurations
 ```
 zookeeper.connect=zookeeper:2181
 listeners=PLAINTEXT://:9092
@@ -45,7 +45,7 @@ confluent.metrics.reporter.topic.replicas=1
 
 - Control Center
 
-Navigate to `/etc/confluent-control-center/control-center-production.properties` and modify it as shown
+Navigate to `/etc/confluent-control-center/control-center-production.properties` and set the following configurations
 ```
 confluent.controlcenter.data.dir=/var/lib/confluent/control-center
 zookeeper.connect=zookeeper:2181
@@ -59,7 +59,7 @@ confluent.controlcenter.schema.registry.url=http://schema-registry:8081
 
 - Schema Registry
 
-Navigate to `/etc/schema-registry/schema-registry.properties` and modify it as shown
+Navigate to `/etc/schema-registry/schema-registry.properties` and set the following configurations
 ```
 listeners=http://0.0.0.0:8081
 # Uncomment the lines below
