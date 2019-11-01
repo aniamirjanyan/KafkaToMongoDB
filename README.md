@@ -69,7 +69,7 @@ kafkastore.bootstrap.servers=PLAINTEXT://localhost:9092
 **4. Install MongoDB Sink Connector** (https://github.com/mongodb/mongo-kafka/blob/master/docs/install.md)
 
 Go to https://www.confluent.io/hub/mongodb/kafka-connect-mongodb and download the connector.  
-Extract the connector folder. In there you can find `lib` directory that contains a `.jar` file. Copy the file in your `plugin.path`. Copy the `.jar` file also confluent folder in `/share/java` path. 
+Extract the connector folder. In there you can find `lib` directory that contains a `.jar` file. Copy the file in your `plugin.path`. Copy the `.jar` file also in `/share/java` path in the confluent directory. 
 ```
 sudo cp mongodb-kafka-connect-mongodb-0.2/lib/* <your-plugin-path>
 sudo cp mongodb-kafka-connect-mongodb-0.2/lib/* <path-to-confluent>/share/java
